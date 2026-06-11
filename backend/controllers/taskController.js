@@ -5,7 +5,6 @@ const User = require('../models/User');
 exports.createTask = async (req, res) => {
   try {
     const errors = validationResult(req);
-    console.log(errors, "28");
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
@@ -36,7 +35,6 @@ exports.createTask = async (req, res) => {
       task,
     });
   } catch (error) {
-    console.log(error, "38");
     res.status(500).json({ message: error.message });
   }
 };
