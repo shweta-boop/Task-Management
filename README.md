@@ -203,8 +203,6 @@ DELETE /api/tasks/:id
 
 ---
 
-## Deployment
-
 ### Frontend
 
 * Vercel
@@ -232,5 +230,6 @@ DELETE /api/tasks/:id
 ---
 
 ## Summary
+
 
 This project demonstrates a complete MEAN stack application featuring authentication, role-based authorization, real-time communication, and cloud deployment using modern web technologies.
