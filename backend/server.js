@@ -12,7 +12,7 @@ const app = express();
 const server = http.createServer(app);
 const io = socketIO(server, {
   cors: {
-    origin: process.env.FRONTEND_URL || 'http://localhost:4200',
+    origin: [process.env.FRONTEND_URL || 'http://localhost:4200',    'https://task-management-rose-eight.vercel.app'],
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true,
   },
@@ -21,7 +21,7 @@ const io = socketIO(server, {
 connectDB();
 
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:4200',
+  origin: [process.env.FRONTEND_URL || 'http://localhost:4200',    'https://task-management-rose-eight.vercel.app'],
   credentials: true,
 }));
 
