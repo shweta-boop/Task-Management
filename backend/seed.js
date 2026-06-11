@@ -7,7 +7,10 @@ const Task = require('./models/Task');
 
 const connectDB = async () => {
   try {
-    await mongoose.connect(process.env.MONGODB_URI || 'mongodb+srv://taskmanagement:task%40123@cluster0.qnfncci.mongodb.net/?appName=Cluster0');
+    await mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/task-management', {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
     console.log('Connected to MongoDB');
   } catch (error) {
     console.error('Error connecting to MongoDB:', error);
