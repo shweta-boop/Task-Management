@@ -1,0 +1,46 @@
+<div class="container mt-4">
+  <h2 class="mb-4">All Tasks</h2>
+
+  <div class="loading-container" *ngIf="loading">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+
+  <div class="table-responsive" *ngIf="!loading">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Status</th>
+          <th>Priority</th>
+          <th>Assigned To</th>
+          <th>Created By</th>
+          <th>Due Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let task of tasks">
+          <td>{{ task.title }}</td>
+          <td>
+            <span class="badge" [ngClass]="getStatusBadgeClass(task.status)">
+              {{ task.status }}
+            </span>
+          </td>
+          <td>
+            <span class="badge" [ngClass]="getPriorityBadgeClass(task.priority)">
+              {{ task.priority }}
+            </span>
+          </td>
+          <td>{{ getAssignedToName(task) }}</td>
+          <td>{{ getCreatedByName(task) }}</td>
+          <td>{{ task.dueDate | date: 'short' }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="alert alert-info" *ngIf="tasks.length === 0">
+      No tasks found.
+    </div>
+  </div>
+</div>

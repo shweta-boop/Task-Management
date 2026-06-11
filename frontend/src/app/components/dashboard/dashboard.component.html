@@ -1,0 +1,101 @@
+<div class="dashboard-container">
+  <div class="header mb-4">
+    <h1>Dashboard</h1>
+    <p class="text-muted" *ngIf="currentUser">Welcome, {{ currentUser.username }} ({{ currentUser.role }})</p>
+  </div>
+
+  <div class="action-buttons mb-4">
+    <button class="btn btn-primary" routerLink="/tasks/create">
+      <i class="bi bi-plus-circle"></i> Create New Task
+    </button>
+    <button class="btn btn-secondary ms-2" (click)="loadTasks()">
+      <i class="bi bi-arrow-clockwise"></i> Refresh
+    </button>
+  </div>
+
+  <div class="card mb-4">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-3">
+          <label for="statusFilter" class="form-label">Filter by Status</label>
+          <select
+            id="statusFilter"
+            class="form-select"
+            [(ngModel)]="statusFilter"
+            (change)="onStatusFilterChange()"
+          >
+            <option value="">All Tasks</option>
+            <option value="pending">Pending</option>
+            <option value="in-progress">In Progress</option>
+            <option value="completed">Completed</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="loading-container" *ngIf="loading">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+    <p>Loading tasks...</p>
+  </div>
+
+  <div class="tasks-container" *ngIf="!loading">
+    <div class="row">
+      <div class="col-12" *ngIf="filteredTasks.length === 0">
+        <div class="alert alert-info" role="alert">
+          No tasks found. <a routerLink="/tasks/create" class="alert-link">Create a new task</a>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4 mb-4" *ngFor="let task of filteredTasks">
+        <div class="card h-100 task-card">
+          <div class="card-header">
+            <h5 class="card-title mb-0">{{ task.title }}</h5>
+          </div>
+          <div class="card-body">
+            <p class="card-text">{{ task.description }}</p>
+            <div class="mb-3">
+              <span class="badge" [ngClass]="getStatusBadgeClass(task.status)">
+                {{ task.status }}
+              </span>
+              <span class="badge ms-2" [ngClass]="getPriorityBadgeClass(task.priority)">
+                {{ task.priority }}
+              </span>
+            </div>
+            <div class="task-info">
+              <p class="mb-1">
+                <strong>Assigned to:</strong>
+                {{ getAssignedToName(task) }}
+              </p>
+              <p class="mb-1">
+                <strong>Created by:</strong>
+                {{ getCreatedByName(task) }}
+              </p>
+              <p class="mb-1" *ngIf="task.dueDate">
+                <strong>Due:</strong>
+                {{ task.dueDate | date: 'short' }}
+              </p>
+            </div>
+          </div>
+          <div class="card-footer">
+            <button
+              class="btn btn-sm btn-primary"
+              (click)="editTask(task)"
+            >
+              Edit
+            </button>
+            <button
+              class="btn btn-sm btn-danger ms-2"
+              (click)="deleteTask(task._id || task.id)"
+              *ngIf="canDelete(task)"
+            >
+              Delete
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

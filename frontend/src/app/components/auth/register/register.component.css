@@ -1,0 +1,44 @@
+.card {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border: none;
+}
+
+.card-header {
+  border-bottom: 2px solid #198754;
+}
+
+.form-control.is-invalid {
+  border-color: #dc3545;
+}
+
+.form-control.is-invalid:focus {
+  border-color: #dc3545;
+  box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+}
+
+.btn-success {
+  background-color: #198754;
+  border-color: #198754;
+  transition: all 0.3s ease;
+}
+
+.btn-success:hover:not(:disabled) {
+  background-color: #157347;
+  border-color: #157347;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(25, 135, 84, 0.4);
+}
+
+.btn-success:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+a {
+  color: #198754;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
