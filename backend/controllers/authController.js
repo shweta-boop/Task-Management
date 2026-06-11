@@ -3,7 +3,6 @@ const { validationResult } = require('express-validator');
 const User = require('../models/User');
 
 const generateToken = (id, role) => {
-  console.log(process.env.JWT_SECRET,"6");
   return jwt.sign({ id, role }, process.env.JWT_SECRET, {
     expiresIn: '30d',
   });
@@ -45,7 +44,6 @@ exports.register = async (req, res) => {
       },
     });
   } catch (error) {
-    console.log(error);
     res.status(500).json({ message: error.message });
   }
 };
